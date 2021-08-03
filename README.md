@@ -1,7 +1,7 @@
 # Almedalsdata
 Almedalsdata is a small civic tech project I worked with on my free time. The first step was to find as much of the programs as I could online. The second was to write a small script to fetch that data and convert it to a structure format.
 
-You can read more about the project here.
+You can read more about the project [here](https://medium.com/civictechsweden/almedalsdata-diving-into-the-data-of-the-worlds-biggest-political-festival-267eb6865860).
 
 ## Tech details
 

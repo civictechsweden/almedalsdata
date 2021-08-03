@@ -2,7 +2,7 @@ import html
 import re
 import time
 
-from datetime import date, datetime
+from datetime import datetime
 from time import mktime
 from bs4 import BeautifulSoup
 
