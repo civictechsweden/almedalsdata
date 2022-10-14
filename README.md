@@ -1,7 +1,12 @@
 # Almedalsdata
-Almedalsdata is a small civic tech project I worked with on my free time. The first step was to find as much of the programs as I could online. The second was to write a small script to fetch that data and convert it to a structure format.
+
+Almedalsdata is a small civic tech project I worked with on my free time. The first step was to find as much of the programs as I could online. The second was to write a small script to fetch that data and convert it to a structured format.
 
 You can read more about the project [here](https://medium.com/civictechsweden/almedalsdata-diving-into-the-data-of-the-worlds-biggest-political-festival-267eb6865860).
+
+The generated data is considered an *allmän handling* according to Swedish law. Its license is therefore CC0. The code is licensed with AGPLv3.
+
+Region Gotland doesn't hold any responsibility for the accuracy of the information in the dataset.
 
 ## Tech details
 
@@ -10,6 +15,7 @@ As said earlier, the official program website doesn't have any open API, or bare
 I wrote a script that fetches that list by iterating through its pages. It then fetches the information of each event from the event pages.
 
 The content is saved both as CSV and JSON.
+
 ## Roadmap
 
 ✅ 2021 ([link](https://program.almedalsveckan.info/event/list/2021))
@@ -24,7 +30,6 @@ The content is saved both as CSV and JSON.
 ✅ 2012 ([link](https://program.almedalsveckan.info/event/list/2012))
 ✅ 2011 ([link](https://program.almedalsveckan.info/event/list/2011))
 ✅ 2010 ([link](https://program.almedalsveckan.info/event/list/2010))
-✅ 2009 ([link](https://program.almedalsveckan.info/event/list/2009))
 ✅ 2009 ([link](https://program.almedalsveckan.info/event/list/2009))
 ❌ 2008 ([link](https://program.almedalsveckan.info/event/list/2008))
 ❌ 2007 ([link](https://program.almedalsveckan.info/event/list/2007))
