@@ -8,8 +8,8 @@ from bs4 import BeautifulSoup
 
 from services.downloader import Downloader
 
-AVAILABLE_YEARS = [2018, 2019, 2021]
-AVAILABLE_TYPES = ['meeting']
+AVAILABLE_YEARS = [2022]
+AVAILABLE_TYPES = ['seminar', 'hearing', 'meeting']
 
 PROGRAM_URL = 'https://program.almedalsveckan.info/event/search/events/{}/{}/{}'
 EVENT_URL = 'https://program.almedalsveckan.info/event/user-view/{}'
