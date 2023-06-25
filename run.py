@@ -1,26 +1,44 @@
+import json
 import scrapers.almedalsveckan_info as ai
 from services.writer import Writer
 
+def reduce_event(event):
+    event.pop('description')
+    event.pop('more_info')
+    event.pop('speakers')
+    event.pop('contact_person_1')
+    event.pop('contact_person_2')
+    event.pop('websites')
+    event.pop('facebook')
+    event.pop('twitter')
+    event.pop('hashtags')
 
-#for year in ai.AVAILABLE_YEARS:
-#    for type in ai.AVAILABLE_TYPES:
-#        events = ai.get_detailed_list(year, type)
-#        filename = '{} - {}'.format(year, type)
-#
-#        Writer.write_csv(events, filename + '.csv')
-#        Writer.write_json(events, filename + '.json')
+    return event
 
-#for thousand in reversed(range(0, 650)):
-#    events = []
-#
-#    for id in reversed(range((thousand - 1) * 100, thousand * 100)):
-#        print('Getting info for event {}...'.format(id))
-#        event = ai.get_info(id)
-#
-#        if event:
-#            print('{} – {}'.format(event['title'], event['start']))
-#            events.append(event)
-#
-#    if len(events) > 0:
-#        Writer.write_csv(events, str(thousand) + '00.csv')
-#        Writer.write_json(events, str(thousand) + '00.json')
+all_events = []
+
+for year in ai.AVAILABLE_YEARS:
+    events = []
+
+    # Download from source
+    for type in ai.AVAILABLE_TYPES:
+       type_events = ai.get_detailed_list(year, type)
+       filename = '{} - {}'.format(year, type)
+
+       Writer.write_csv(type_events, filename + '.csv')
+       Writer.write_json(type_events, filename + '.json')
+
+       events.extend(type_events)
+
+    Writer.write_csv(events, f'{year} - events.csv')
+    Writer.write_json(events, f'{year} - events.json')
+
+    # Load from file
+    # with open(f'{year} - events.json') as file_json:
+    #     events = json.load(file_json)
+
+    all_events.extend([reduce_event(event) for event in events])
+
+if all_events:
+    Writer.write_csv(all_events, 'summary.csv')
+    Writer.write_json(all_events, 'summary.json')
