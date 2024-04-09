@@ -8,7 +8,9 @@ from bs4 import BeautifulSoup
 
 from services.downloader import Downloader
 
-AVAILABLE_YEARS = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023]
+# AVAILABLE_YEARS = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024]
+AVAILABLE_YEARS = [2024]
+
 AVAILABLE_TYPES = ['seminar', 'hearing', 'meeting']
 
 PROGRAM_URL = 'https://program.almedalsveckan.info/event/search/events/{}/{}/{}'
@@ -24,7 +26,7 @@ def get_list(year, type):
     results = get_ids(contents)
 
     for page in range(1, number_of_pages):
-        print('Getting results for page {}...'.format(page + 1))
+        print(f'Getting results for page {page + 1}...')
         results.extend(
             get_ids(Downloader.get_json(PROGRAM_URL.format(year, type, page))))
 
@@ -77,8 +79,7 @@ def get_detailed_list(year, type):
     events = []
 
     for event in list:
-        print('Getting info for event {} : {}...'.format(
-            event['id'], event['title']))
+        print(f"Getting info for event {event['id']} : {event['title']}...")
         events.append(get_info(event['id']))
 
     return events
@@ -120,8 +121,8 @@ def get_dates(string):
         date_1 = dates[0]
         date_2 = dates[0]
     else:
-        date_1 = dates[0].replace(' {} - {}'.format(times[0], times[1]), '')
-        date_2 = dates[-1].replace(' {} - {}'.format(times[-2], times[-1]), '')
+        date_1 = dates[0].replace(f' {times[0]} - {times[1]}', '')
+        date_2 = dates[-1].replace(f' {times[-2]} - {times[-1]}', '')
 
     return {
         'start': date_from(date_1, times[0]),
@@ -130,8 +131,7 @@ def get_dates(string):
 
 
 def date_from(date_string, time_string):
-    struct = time.strptime('{} {}'.format(date_string, time_string),
-                           "%d/%m %Y %H:%M")
+    struct = time.strptime(f'{date_string} {time_string}', "%d/%m %Y %H:%M")
     return datetime.fromtimestamp(mktime(struct))
 
 

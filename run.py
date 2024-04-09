@@ -22,13 +22,15 @@ for year in ai.AVAILABLE_YEARS:
 
     # Download from source
     for type in ai.AVAILABLE_TYPES:
-       type_events = ai.get_detailed_list(year, type)
-       filename = '{} - {}'.format(year, type)
+        print(f'Fetching {type} events for {year}...')
+        type_events = ai.get_detailed_list(year, type)
+        filename = f'{year} - {type}'
 
-       Writer.write_csv(type_events, filename + '.csv')
-       Writer.write_json(type_events, filename + '.json')
+        if type_events:
+            Writer.write_csv(type_events, filename + '.csv')
+            Writer.write_json(type_events, filename + '.json')
 
-       events.extend(type_events)
+            events.extend(type_events)
 
     Writer.write_csv(events, f'{year} - events.csv')
     Writer.write_json(events, f'{year} - events.json')
@@ -36,6 +38,10 @@ for year in ai.AVAILABLE_YEARS:
     # Load from file
     # with open(f'{year} - events.json') as file_json:
     #     events = json.load(file_json)
+
+    # Load past editions from file, only works to add one more year
+    with open('summary.json') as file_json:
+        all_events = json.load(file_json)
 
     all_events.extend([reduce_event(event) for event in events])
 
