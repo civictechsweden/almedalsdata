@@ -14,7 +14,6 @@ for year in ai.AVAILABLE_YEARS:
         print(f"Loading {year} from file...")
         with open(f"{year} - events.json") as file_json:
             events = json.load(file_json)
-
     else:
         print(f"Downloading {year} from source...")
         for type in ai.AVAILABLE_TYPES:
