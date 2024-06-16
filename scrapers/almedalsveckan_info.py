@@ -9,15 +9,17 @@ from bs4 import BeautifulSoup
 from services.downloader import Downloader
 
 AVAILABLE_YEARS = [
-    2009,
-    2010,
-    2011,
-    2012,
-    2013,
-    2014,
-    2015,
-    2016,
-    2017,
+    # Unfortunately, years 2009-2016 aren't available anymore
+    # Good they're already downloaded :)
+    # 2009,
+    # 2010,
+    # 2011,
+    # 2012,
+    # 2013,
+    # 2014,
+    # 2015,
+    # 2016,
+    # 2017,
     2018,
     2019,
     2021,
@@ -74,6 +76,8 @@ def get_info(id):
         "topic_2": get_field(content, "Ämnesområde 2"),
         "language": get_field(content, "Språk"),
         "place": get_field(content, "Plats"),
+        "latitude": get_coordinate(content, "latitude"),
+        "longitude": get_coordinate(content, "longitude"),
         "description": get_field(content, "Beskrivning av samhällsfrågan"),
         "more_info": get_field(content, "Utökad information om evenemanget"),
         "speakers": get_field(content, "Medverkande"),
@@ -90,11 +94,11 @@ def get_info(id):
 
 
 def get_detailed_list(year, type):
-    list = get_list(year, type)
+    detailed_list = get_list(year, type)
 
     events = []
 
-    for event in list:
+    for event in detailed_list:
         print(f"Getting info for event {event['id']} : {event['title']}...")
         events.append(get_info(event["id"]))
 
@@ -173,6 +177,11 @@ def get_field(content, title):
             return values[i].text.strip()
 
     return None
+
+
+def get_coordinate(content, name):
+    tag = content.select_one("#" + name)
+    return float(tag["value"]) if tag else ""
 
 
 def reduce_event(event):
