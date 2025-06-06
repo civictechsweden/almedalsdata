@@ -18,5 +18,6 @@ class Downloader(object):
                 print("Permanent error: skipping this event")
                 return None
 
+    @staticmethod
     def get_json(url):
         return json.loads(Downloader.get(url).decode("utf-8"))
