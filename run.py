@@ -1,5 +1,5 @@
 import json
-import scrapers.almedalsveckan_info as ai
+import scrapers.old_almedalsveckan_info as ai
 from services.writer import Writer
 
 ONLY_REFETCH_CURRENT_YEAR = True
